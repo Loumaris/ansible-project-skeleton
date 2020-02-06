@@ -1,0 +1,7 @@
+.vagrant/
+*.log
+*.retry
+.vault_*
+tmp/
+.DS_Store
+.vscode

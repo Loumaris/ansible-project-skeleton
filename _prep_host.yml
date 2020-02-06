@@ -1,0 +1,27 @@
+---
+# required by ubuntu 18.04
+
+- hosts: all
+  gather_facts: False
+
+  tasks:
+    # this one needs to be the first to install python for ansible
+    - name: Install python for Ansible
+      raw: bash -c "apt -qqy update && apt install -qqy python2.7 python-minimal python-setuptools"
+      register: output
+      changed_when: output.rc > 0
+
+    # this one needs to be on second place, because we need python to run ansible command
+    - name: Initial distribution update
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400
+        autoclean: yes
+
+    - name: Set nameserver
+      raw: bash -c "echo 'nameserver 1.1.1.1' > /etc/resolv.conf"
+      register: output
+      changed_when: output.rc > 0
+
+

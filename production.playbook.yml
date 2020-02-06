@@ -1,0 +1,13 @@
+
+###############################################################################
+#   common stuff
+###############################################################################
+- name: apply common configuration to all nodes
+  hosts: all
+  become: true
+  roles:
+    - loumaris.toolset
+    - loumaris.docker
+    - { role: loumaris.firewall, firewall_rules: [ { rule: 'allow', port: 80 }, { rule: 'allow', port: 443 } ] }
+    - { role: loumaris.user, username: 'cheimke', fullname: 'Christian Heimke', sudo: true, password: "{{ user__cheimke_password }}" }
+    - { role: loumaris.ssh-key, username: 'cheimke', keyfile: 'cheimke' }

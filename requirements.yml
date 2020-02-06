@@ -1,0 +1,25 @@
+---
+- name: loumaris.toolset
+  src: https://github.com//Loumaris/loumaris.toolset.git
+
+- name: loumaris.firewall
+  src: https://github.com//Loumaris/loumaris.firewall.git
+
+- name: loumaris.common
+  src: https://github.com//Loumaris/loumaris.common.git
+
+- name: loumaris.docker
+  src: https://github.com//Loumaris/loumaris.docker.git
+
+- name: loumaris.rancher-node
+  src: https://github.com//anible/loumaris.rancher-node.git
+  version: v1.1.0
+
+- name: loumaris.user
+  src: https://github.com//anible/loumaris.user.git
+
+- name: loumaris.ssh-key
+  src: https://github.com//anible/loumaris.ssh-key.git
+
+# from the galaxy
+- geerlingguy.docker
