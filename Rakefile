@@ -91,7 +91,14 @@ FileList['./*.playbook.yml'].each do |task|
   namespace "#{name}" do
     inventory = "#{name}.inventory.yml"
     vault = "#{name}.vault.yml"
-    vault_password_file = ".vault_#{name}_pass"
+    vault_password_file = ENV['ANSIBLE_VAULT_PASSWORD_FILE'] || ".vault_#{name}_pass"
+
+    namespace :ci do
+      task "deploy" do
+        sh "echo ${ANSIBLE_VAULT_PASSWORD} > #{vault_password_file}"
+        sh "ansible-playbook #{task} -e @#{vault} --vault-password-file=#{vault_password_file} -i #{inventory}"
+      end
+    end
 
     desc "Deploy to #{name}"
     task "deploy" do

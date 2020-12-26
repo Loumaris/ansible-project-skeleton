@@ -1,0 +1,12 @@
+stages:
+- deploy
+
+deploy:
+  stage: deploy
+  script:
+    - docker run -e "ANSIBLE_VAULT_PASSWORD=$ANSIBLE_VAULT_PASSWORD"  -v ${PWD}:/app loumaris/ansible rake production:ci:deploy
+  only:
+    - master
+    - tags
+  tags:
+    - shell
